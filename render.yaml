@@ -51,4 +51,4 @@ services:
       - key: NODE_VERSION
         value: 20.11.1
       - key: BACKEND_INTERNAL_URL
-        value: https://resumeiq-backend.onrender.com
+        value: https://resumeiq-backend-so9j.onrender.com
