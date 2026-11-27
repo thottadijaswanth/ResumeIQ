@@ -1,24 +1,34 @@
+databases:
+  - name: resumeiq-db
+    plan: free
+    databaseName: resumeiq
+    user: resumeiq
+
 services:
   - type: web
     name: resumeiq-backend
     runtime: python
     plan: free
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt
     startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.3
+      - key: PYTHONPATH
+        value: .
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
         value: "false"
       - key: DATABASE_URL
-        value: sqlite:///./resumeiq.db
+        fromDatabase:
+          name: resumeiq-db
+          property: connectionString
       - key: SECRET_KEY
         generateValue: true
       - key: AI_PROVIDER
-        value: openai
+        value: auto
       - key: OPENAI_MODEL
         value: gpt-4o-mini
       - key: OPENAI_API_KEY
@@ -35,10 +45,10 @@ services:
     runtime: node
     plan: free
     rootDir: frontend
-    buildCommand: npm ci && npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm run start -- -p $PORT -H 0.0.0.0
     envVars:
       - key: NODE_VERSION
         value: 20.11.1
-      - key: NEXT_PUBLIC_API_URL
-        sync: false
+      - key: BACKEND_INTERNAL_URL
+        value: https://resumeiq-backend.onrender.com

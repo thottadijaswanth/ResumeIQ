@@ -52,6 +52,7 @@ _COLUMN_MIGRATIONS = {
 def _apply_additive_column_migrations() -> None:
     inspector = inspect(engine)
     existing_tables = set(inspector.get_table_names())
+    is_postgres = engine.dialect.name == "postgresql"
     with engine.begin() as conn:
         for table_name, columns in _COLUMN_MIGRATIONS.items():
             if table_name not in existing_tables:
@@ -59,7 +60,12 @@ def _apply_additive_column_migrations() -> None:
             existing_cols = {col["name"] for col in inspector.get_columns(table_name)}
             for col_name, col_ddl in columns:
                 if col_name not in existing_cols:
-                    conn.execute(text(f"ALTER TABLE {table_name} ADD COLUMN {col_name} {col_ddl}"))
+                    ddl = col_ddl
+                    if is_postgres:
+                        ddl = ddl.replace("DATETIME", "TIMESTAMP")
+                        ddl = ddl.replace("BOOLEAN NOT NULL DEFAULT 0", "BOOLEAN NOT NULL DEFAULT FALSE")
+                        ddl = ddl.replace("BOOLEAN NOT NULL DEFAULT 1", "BOOLEAN NOT NULL DEFAULT TRUE")
+                    conn.execute(text(f"ALTER TABLE {table_name} ADD COLUMN {col_name} {ddl}"))
                     logger.info(f"Added column '{col_name}' to table '{table_name}'.")
 
 
