@@ -41,7 +41,7 @@ services:
         value: ^https://.*\.onrender\.com$
 
   - type: web
-    name: resumeiq-frontend
+    name: resumeiq-app
     runtime: node
     plan: free
     rootDir: frontend
