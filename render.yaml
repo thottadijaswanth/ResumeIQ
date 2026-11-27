@@ -1,9 +1,3 @@
-databases:
-  - name: resumeiq-db
-    plan: free
-    databaseName: resumeiq
-    user: resumeiq
-
 services:
   - type: web
     name: resumeiq-backend
@@ -22,9 +16,7 @@ services:
       - key: DEBUG
         value: "false"
       - key: DATABASE_URL
-        fromDatabase:
-          name: resumeiq-db
-          property: connectionString
+        sync: false
       - key: SECRET_KEY
         generateValue: true
       - key: AI_PROVIDER
