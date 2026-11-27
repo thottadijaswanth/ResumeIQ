@@ -1,0 +1,68 @@
+from backend.app.schemas.auth import RegisterRequest, LoginRequest, Token, TokenPayload
+from backend.app.schemas.user import UserResponse, UserUpdate
+from backend.app.schemas.resume import (
+    StructuredResume,
+    ResumeCreate,
+    ResumeUpdate,
+    ResumeResponse,
+    ResumeListResponse,
+    ExperienceItem,
+    EducationItem,
+    ProjectItem,
+)
+from backend.app.schemas.job import StructuredJob, JobCreate, JobUpdate, JobResponse, JobListResponse
+from backend.app.schemas.analysis import (
+    AnalysisCreate,
+    AnalysisResponse,
+    AnalysisResultData,
+    SkillMatchItem,
+    MissingSkillItem,
+    ExperienceGap,
+    ATSAnalysis,
+    RecommendationItem,
+    RequirementEvidence,
+    TailorResumeRequest,
+    TailorResumeResponse,
+    CoverLetterRequest,
+    CoverLetterResponse,
+)
+from backend.app.schemas.application import ApplicationCreate, ApplicationUpdate, ApplicationResponse
+
+__all__ = [
+    "RegisterRequest",
+    "LoginRequest",
+    "Token",
+    "TokenPayload",
+    "UserResponse",
+    "UserUpdate",
+    "StructuredResume",
+    "ResumeCreate",
+    "ResumeUpdate",
+    "ResumeResponse",
+    "ResumeListResponse",
+    "ExperienceItem",
+    "EducationItem",
+    "ProjectItem",
+    "StructuredJob",
+    "JobCreate",
+    "JobUpdate",
+    "JobResponse",
+    "JobListResponse",
+    "AnalysisCreate",
+    "AnalysisResponse",
+    "AnalysisResultData",
+    "SkillMatchItem",
+    "MissingSkillItem",
+    "ExperienceGap",
+    "ATSAnalysis",
+    "RecommendationItem",
+    "RequirementEvidence",
+    "TailorResumeRequest",
+    "TailorResumeResponse",
+    "CoverLetterRequest",
+    "CoverLetterResponse",
+    "ApplicationCreate",
+    "ApplicationUpdate",
+    "ApplicationResponse",
+]
+
