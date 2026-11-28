@@ -37,12 +37,27 @@ async function proxyRequest(
   const body = hasBody ? await request.arrayBuffer() : undefined;
 
   try {
-    const upstream = await fetch(targetUrl, {
-      method,
-      headers: forwardHeaders,
-      body: hasBody && body && body.byteLength > 0 ? body : undefined,
-      redirect: "manual",
-    });
+    let upstream: Response | null = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        upstream = await fetch(targetUrl, {
+          method,
+          headers: forwardHeaders,
+          body: hasBody && body && body.byteLength > 0 ? body : undefined,
+          redirect: "manual",
+          signal: AbortSignal.timeout(90000),
+        });
+        if (upstream.status !== 502 && upstream.status !== 503) {
+          break;
+        }
+      } catch (innerErr) {
+        if (attempt === 1) throw innerErr;
+      }
+      await new Promise((r) => setTimeout(r, 2000));
+    }
+    if (!upstream) {
+      throw new Error("Empty upstream response");
+    }
 
     const responseHeaders = new Headers();
     const contentType = upstream.headers.get("content-type");
