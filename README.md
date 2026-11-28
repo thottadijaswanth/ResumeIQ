@@ -1,13 +1,17 @@
 # ResumeIQ — AI Resume Analyzer & Job Matcher
 
-[![CI/CD Pipeline](https://github.com/example/resumeiq/actions/workflows/ci.yml/badge.svg)](https://github.com/example/resumeiq/actions)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-resumeiq--app.onrender.com-4F46E5?style=for-the-badge&logo=render)](https://resumeiq-app.onrender.com)
+[![CI/CD Pipeline](https://github.com/thottadijaswanth/ResumeIQ/actions/workflows/ci.yml/badge.svg)](https://github.com/thottadijaswanth/ResumeIQ/actions)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-black.svg?logo=next.js)](https://nextjs.org)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%20%2B%20pgvector-336791.svg?logo=postgresql)](https://github.com/pgvector/pgvector)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791.svg?logo=postgresql)](https://www.postgresql.org)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python)](https://python.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6.svg?logo=typescript)](https://www.typescriptlang.org)
 
-**ResumeIQ** is a production-grade full-stack web application designed for software engineers and career professionals to analyze resumes against job postings, compute transparent deterministic match scores, audit ATS compatibility, perform semantic vector search, and generate tailored application materials with a strict zero-hallucination policy.
+> **Live Application:** **[https://resumeiq-app.onrender.com](https://resumeiq-app.onrender.com)**  
+> *(Hosted on Render Free Tier — if the service was idle for 15+ minutes, the initial load takes ~30–60 seconds to wake up.)*
+
+**ResumeIQ** is a production-grade full-stack web application designed for recruiters and engineers to screen bulk resumes against structured jobs, compute transparent deterministic match scores with timeline-verified experience checks, audit ATS compatibility, perform semantic vector search, and run optional AI reranking (OpenAI-compatible cloud AI or local Ollama `qwen3:1.7b`).
 
 ---
 
